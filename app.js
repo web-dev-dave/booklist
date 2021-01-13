@@ -28,6 +28,12 @@ UI.prototype.addBookToList = function(book) {
   // console.log(row)
 }
 
+UI.prototype.clearFields = function() {
+  document.getElementById('title').value = ''
+  document.getElementById('author').value = ''
+  document.getElementById('isbn').value = ''
+}
+
 // Event Listeneres
 document.getElementById('book-form').addEventListener('submit', 
 function(e) {
@@ -49,6 +55,9 @@ function(e) {
 
   // Add book to list
   ui.addBookToList(book)
+
+  // Clear fields
+  ui.clearFields()
 
   e.preventDefault()
 })
