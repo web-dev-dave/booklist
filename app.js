@@ -9,11 +9,11 @@ function Book(title, author, isbn) {
 function UI() {}
 
 UI.prototype.addBookToList = function(book) {
-  // console.log(book)
   const list = document.getElementById('book-list')
 
   // Create a tr element
   const row = document.createElement('tr')
+
   // Insert cols
   row.innerHTML = `
   <td>${book.title}</td>
@@ -21,11 +21,9 @@ UI.prototype.addBookToList = function(book) {
   <td>${book.isbn}</td>
   <td><a href='#' class='delete'>X</a></td>
   `
-  // Add class
-  row.className = 'book-item'
+
   // Append row to list
   list.appendChild(row)
-  // console.log(row)
 }
 
 UI.prototype.clearFields = function() {
@@ -42,22 +40,24 @@ function(e) {
         author = document.getElementById('author').value,
         isbn = document.getElementById('isbn').value
 
-  // console.log(title, author, isbn)
-
   // Initialize book
   const book = new Book(title, author, isbn)
-  // console.log(book)
 
   // Initialize UI
   const ui = new UI()
 
-  console.log(ui)
+  // Validate
+  if (title === '' || author === '' || isbn === '') {
+    // Error alert
+    UI.showError('Please fill in all fields', 'error')
+  } else {
+    // Add book to list
+    ui.addBookToList(book)
+  
+    // Clear fields
+    ui.clearFields()
+  }
 
-  // Add book to list
-  ui.addBookToList(book)
-
-  // Clear fields
-  ui.clearFields()
 
   e.preventDefault()
 })
